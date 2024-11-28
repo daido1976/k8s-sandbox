@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-memory-leak-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: php-memory-leak-test
+  template:
+    metadata:
+      labels:
+        app: php-memory-leak-test
+    spec:
+      containers:
+        - name: php-leaky-container
+          image: php:cli
+          volumeMounts:
+            - name: script-volume
+              mountPath: /scripts
+          command: ["php", "/scripts/memory-leak.php"]
+          resources:
+            limits:
+              memory: "50Mi"
+            requests:
+              memory: "50Mi"
+      volumes:
+        - name: script-volume
+          configMap:
+            name: php-memory-leak-script
