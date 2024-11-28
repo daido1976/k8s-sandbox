@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: php-memory-leak-test
+spec:
+  containers:
+    - name: php-leaky-container
+      image: php:cli
+      volumeMounts:
+        - name: script-volume
+          mountPath: /scripts
+      command: ["php", "/scripts/memory-leak.php"]
+      resources:
+        limits:
+          memory: "50Mi"
+        requests:
+          memory: "50Mi"
+  volumes:
+    - name: script-volume
+      configMap:
+        name: php-memory-leak-script

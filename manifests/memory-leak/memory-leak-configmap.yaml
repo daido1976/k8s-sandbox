@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: php-memory-leak-script
+data:
+  memory-leak.php: |
+    <?php
+    $data = [];
+    while (true) {
+        $data[] = str_repeat("leak", 1000000); // 約1MBの文字列
+        echo "Memory usage: " . memory_get_usage() . " bytes\n";
+        sleep(1); // 1秒待機
+    }
