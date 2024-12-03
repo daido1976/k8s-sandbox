@@ -1,7 +1,5 @@
 Drain と PDB の動作確認用。
 
-TODO: PDB の object 作って動作確認もする。
-
 ```sh
 # drain動作確認のために複数ノード立ち上げる
 $ minikube start --nodes 2
