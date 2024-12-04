@@ -2,9 +2,9 @@ Argo CD を minikube にデプロイしてみる。
 
 ```sh
 # argocd用のnamespace作成
-$ kubectl create namespace argocd
+$ kubectl --context=minikube create namespace argocd
 # argocdのインストール
-$ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+$ kubectl --context=minikube apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 # ポートフォワードしてargocdにブラウザからアクセスできるようにする
 $ kubectl port-forward svc/argocd-server -n argocd 8080:443
 # 以下でパスワードを取得しつつ `Username: admin/Password: {取得したパスワード}` でログインする
